@@ -15,15 +15,9 @@ const { NotImplementedError } = require('../extensions/index.js');
  *
  */
 function isMAC48Address(n) {
-  const digitGroups = n.split('-');
-  if (digitGroups.length !== 6) return false;
-
-  for (const group of digitGroups) {
-    if (isNaN(parseInt(group, 16))) return false;
-  }
-  return true;
+  return n.split('-').filter((octet) => /[A-F0-9]{2}/.test(octet)).length === 6;
 }
 
 module.exports = {
-  isMAC48Address
+  isMAC48Address,
 };
